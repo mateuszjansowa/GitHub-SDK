@@ -1,23 +1,27 @@
 
 # Github-SDK
 
+![My code implementation](https://github.com/mateuszjansowa/GitHub-SDK/blob/main/assets/code.PNG?raw=true)
   
 <br>
+
 In this repository I decided to build a **Github** [Software Development Kit](https://en.wikipedia.org/wiki/Software_development_kit) 🤓
-<br><br>
+
+
 Imagine all thins that are held by User Interface on Github website can be reflected in JavaScript terminal using **Github API**.
-<br><br>
+
 Build of Github SDK allows me to maximize productivity, save time and energy while doing automated stuff related to *Github activity* 📝 
-<br>
+
+
 ...and most important of it all: I've learnt about Unit Testing and TDD.
 
-<br><br>
+<br>
 
 So the whole project is built using [Test Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) methodology. 
 It is a development process in which software requirements and functionalities are firstly converted to **test cases**. Next step is to build an implementation that passess both software requirement and test case. After all there is a code refactoring. It is so called **'red-green-refactor'** cycle.
 <br><br>
 
-![enter image description here](https://philippe.bourgau.net/imgs/2017-06-28-dont-stick-to-tdds-red-green-refactor-loop-to-the-letter/red-green-refactor.jpg)
+![Red green refactor cycle](https://philippe.bourgau.net/imgs/2017-06-28-dont-stick-to-tdds-red-green-refactor-loop-to-the-letter/red-green-refactor.jpg)
 
 <br><br>
 ⚙️ Please read down below **how to use** the SDK ⚙️
