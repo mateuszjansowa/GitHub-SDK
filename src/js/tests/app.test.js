@@ -205,7 +205,7 @@ xdescribe('Repository starring', () => {
   });
 });
 
-describe('Pull requests', () => {
+xdescribe('Pull requests', () => {
   it('Resolves with the list of pull requests', async () => {
     expect.assertions(1);
     const githubAPI = new GithubAPI(token);
@@ -230,5 +230,46 @@ describe('Pull requests', () => {
     await githubSDK
       .showPullRequests(ownerName, repoName)
       .catch((err) => expect(err.statusText).toBe('Not Found'));
+  });
+});
+
+describe('Repository forking', () => {
+  it('Shows the list of forked repositories', async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.existingOutsideUser;
+    const repoName = configGH.existingRepository;
+
+    await githubSDK
+      .listForks(ownerName, repoName)
+      .then((data) => expect(Array.isArray(data)).toBeTruthy());
+  });
+
+  it('Rejects to show the list of forked repositories if user not exist', async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.nonExistingOutsideUser;
+    const repoName = configGH.existingRepository;
+
+    await githubSDK
+      .listForks(ownerName, repoName)
+      .catch((err) => expect(err.statusText).toBe('Not Found'));
+  });
+
+  it('Forks a passed repository', async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.existingOutsideUser;
+    const repoName = configGH.existingRepository;
+
+    await githubSDK
+      .forkRepo(ownerName, repoName)
+      .then((resp) => expect(resp.name).toBe(repoName));
   });
 });
