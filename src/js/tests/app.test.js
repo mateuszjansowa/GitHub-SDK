@@ -154,7 +154,7 @@ xdescribe('Show user or organization activity', () => {
   });
 });
 
-describe('Repository starring', () => {
+xdescribe('Repository starring', () => {
   it('Stars a repository if it exists', async () => {
     // expect.assertions(1);
     const githubAPI = new GithubAPI(token);

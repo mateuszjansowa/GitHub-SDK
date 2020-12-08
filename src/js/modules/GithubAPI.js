@@ -91,6 +91,36 @@ class GithubAPI {
 
     return this._fetch(`users/${user}/events`, options);
   }
+  starRepo(ownerName, repoName) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/vnd.github.v3.star+json',
+        Authorization: `token ${this.token}`,
+      },
+      body: JSON.stringify({
+        permission: 'pull',
+      }),
+    };
+
+    return this._fetch(`user/starred/${ownerName}/${repoName}`, options);
+  }
+
+  removeStarFromRepo(ownerName, repoName) {
+    const options = {
+      method: 'DELETE',
+
+      headers: {
+        Accept: 'application/vnd.github.v3.star+json',
+        Authorization: `token ${this.token}`,
+      },
+      body: JSON.stringify({
+        permission: 'pull',
+      }),
+    };
+
+    return this._fetch(`user/starred/${ownerName}/${repoName}`, options);
+  }
 }
 
 export default GithubAPI;

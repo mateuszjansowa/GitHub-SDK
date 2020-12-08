@@ -48,6 +48,13 @@ class GithubSDK {
   getUserActivity(user) {
     return this.apiService.loadUserActivity(user);
   }
+  starRepo(ownerName, repoName) {
+    return this.apiService.starRepo(ownerName, repoName);
+  }
+
+  removeStarFromRepo(ownerName, repoName) {
+    return this.apiService.removeStarFromRepo(ownerName, repoName);
+  }
 }
 
 export default GithubSDK;
