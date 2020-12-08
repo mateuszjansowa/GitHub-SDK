@@ -127,3 +127,29 @@ xdescribe('User invitation to collaborate', () => {
       .then((data) => expect(Array.isArray(data)).toBeTruthy);
   });
 });
+
+xdescribe('Show user or organization activity', () => {
+  it('Shows user activity', async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const user = configGH.outsideUser;
+
+    await githubSDK
+      .getUserActivity(user)
+      .then((data) => expect(Array.isArray(data)).toBeTruthy());
+  });
+
+  it(`Rejects to show activity if user or organization doesn't exist`, async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const user = configGH.nonExistingUser;
+
+    await githubSDK
+      .getUserActivity(user)
+      .catch((err) => expect(err.statusText).toBe('Not Found'));
+  });
+});
