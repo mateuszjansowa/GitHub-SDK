@@ -91,6 +91,7 @@ class GithubAPI {
 
     return this._fetch(`users/${user}/events`, options);
   }
+
   starRepo(ownerName, repoName) {
     const options = {
       method: 'PUT',
@@ -120,6 +121,14 @@ class GithubAPI {
     };
 
     return this._fetch(`user/starred/${ownerName}/${repoName}`, options);
+  }
+
+  showPullRequests(ownerName, repoName) {
+    const options = {
+      method: 'GET',
+    };
+
+    return this._fetch(`repos/${ownerName}/${repoName}/pulls`, options);
   }
 }
 
