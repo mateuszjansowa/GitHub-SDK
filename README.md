@@ -8,7 +8,7 @@
 In this repository I decided to build a **Github** [Software Development Kit](https://en.wikipedia.org/wiki/Software_development_kit) 🤓
 
 
-Imagine all thins that are held by User Interface on Github website can be reflected in JavaScript terminal using **Github API**.
+Imagine all things that are held by User Interface on Github website can be reflected in JavaScript terminal using **Github API**.
 
 Build of Github SDK allows me to maximize productivity, save time and energy while doing automated stuff related to *Github activity* 📝 
 
