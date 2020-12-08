@@ -34,6 +34,20 @@ class GithubSDK {
         }
       });
   }
+
+  _getUserId(data, userName) {
+    let id = 0;
+    for (const invitation of data) {
+      if (invitation['invitee']['login'] === userName) {
+        id = invitation['id'];
+      }
+    }
+    return id;
+  }
+
+  getUserActivity(user) {
+    return this.apiService.loadUserActivity(user);
+  }
 }
 
 export default GithubSDK;

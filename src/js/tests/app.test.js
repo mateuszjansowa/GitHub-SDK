@@ -128,7 +128,7 @@ xdescribe('User invitation to collaborate', () => {
   });
 });
 
-xdescribe('Show user or organization activity', () => {
+describe('Show user or organization activity', () => {
   it('Shows user activity', async () => {
     expect.assertions(1);
     const githubAPI = new GithubAPI(token);

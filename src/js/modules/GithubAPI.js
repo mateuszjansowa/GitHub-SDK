@@ -83,6 +83,14 @@ class GithubAPI {
 
     return this._fetch(`repos/${owner}/${repoName}/invitations/${id}`, options);
   }
+
+  loadUserActivity(user) {
+    const options = {
+      method: 'GET',
+    };
+
+    return this._fetch(`users/${user}/events`, options);
+  }
 }
 
 export default GithubAPI;
