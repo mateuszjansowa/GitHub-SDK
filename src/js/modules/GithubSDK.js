@@ -60,6 +60,14 @@ class GithubSDK {
   showPullRequests(ownerName, repoName) {
     return this.apiService.showPullRequests(ownerName, repoName);
   }
+
+  listForks(ownerName, repoName) {
+    return this.apiService.listForks(ownerName, repoName);
+  }
+
+  forkRepo(ownerName, repoName) {
+    return this.apiService.forkRepo(ownerName, repoName);
+  }
 }
 
 export default GithubSDK;

@@ -130,6 +130,21 @@ class GithubAPI {
 
     return this._fetch(`repos/${ownerName}/${repoName}/pulls`, options);
   }
+
+  listForks(ownerName, repoName) {
+    const options = {
+      method: 'GET',
+    };
+    return this._fetch(`repos/${ownerName}/${repoName}/forks`, options);
+  }
+
+  forkRepo(ownerName, repoName) {
+    const options = {
+      method: 'POST',
+    };
+
+    return this._fetch(`repos/${ownerName}/${repoName}/forks`, options);
+  }
 }
 
 export default GithubAPI;

@@ -1,7 +1,6 @@
 export const configGH = {
   // Provide your GitHub username and token:
   username: 'mateuszjansowa',
-  token: '',
 
   // Provide repository name and username to use SDK methods
   repository: 'Codewars',

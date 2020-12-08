@@ -233,7 +233,7 @@ xdescribe('Pull requests', () => {
   });
 });
 
-describe('Repository forking', () => {
+xdescribe('Repository forking', () => {
   it('Shows the list of forked repositories', async () => {
     expect.assertions(1);
     const githubAPI = new GithubAPI(token);
