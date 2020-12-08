@@ -16,3 +16,5 @@ class GithubSDK {
     return this.apiService.loadReposCommits(this.username, repoName);
   }
 }
+
+export default GithubSDK;

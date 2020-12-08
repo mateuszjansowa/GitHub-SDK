@@ -64,3 +64,66 @@ xdescribe('User informations', () => {
       .catch((err) => expect(err.statusText).toBe('Not Found'));
   });
 });
+
+xdescribe('User invitation to collaborate', () => {
+  it('Invites the user to the repo if both repo and user exist', async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const repoName = configGH.repository;
+    const invitedUser = configGH.existingOutsideUser;
+
+    await githubSDK
+      .sendInvitation(repoName, invitedUser)
+      .then((response) => expect(response.invitee.login).toBe(invitedUser));
+  });
+
+  it(`Rejects when inviting user to the repo that doesn't exist`, async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const repoName = configGH.nonExistingRepository;
+    const invitedUser = configGH.existingOutsideUser;
+    await githubSDK
+      .sendInvitation(repoName, invitedUser)
+      .catch((err) => expect(err.statusText).toBe('Not Found'));
+  });
+
+  it(`Rejects when inviting user to the repo and invited user doesn't exist`, async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const repoName = configGH.existingRepository;
+    const invitedUser = configGH.nonExistingUser;
+
+    await githubSDK
+      .sendInvitation(repoName, invitedUser)
+      .catch((err) => expect(err.statusText).toBe('Not Found'));
+  });
+
+  xit('Removes an invitation to the repo', async () => {
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const repoName = configGH.repository;
+    const invitedUser = configGH.outsideUser;
+
+    await githubSDK
+      .removeInvitation(repoName, invitedUser)
+      .then((data) => expect(data.statusText).toBe('No Content'));
+  });
+
+  it('Show the list of all invitations to the repo', async () => {
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const repoName = configGH.repository;
+
+    await githubSDK
+      .listInvitations(repoName)
+      .then((data) => expect(Array.isArray(data)).toBeTruthy);
+  });
+});

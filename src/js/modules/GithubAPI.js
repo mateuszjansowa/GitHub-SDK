@@ -52,3 +52,5 @@ class GithubAPI {
     return this._fetch(`repos/${username}/${repoName}/commits`, options);
   }
 }
+
+export default GithubAPI;
