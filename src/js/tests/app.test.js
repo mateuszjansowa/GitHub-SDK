@@ -128,7 +128,7 @@ xdescribe('User invitation to collaborate', () => {
   });
 });
 
-describe('Show user or organization activity', () => {
+xdescribe('Show user or organization activity', () => {
   it('Shows user activity', async () => {
     expect.assertions(1);
     const githubAPI = new GithubAPI(token);
@@ -151,5 +151,56 @@ describe('Show user or organization activity', () => {
     await githubSDK
       .getUserActivity(user)
       .catch((err) => expect(err.statusText).toBe('Not Found'));
+  });
+});
+
+describe('Repository starring', () => {
+  it('Stars a repository if it exists', async () => {
+    // expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.existingOutsideUser;
+    const repoName = configGH.existingRepository;
+
+    await githubSDK
+      .starRepo(ownerName, repoName)
+      .then((resp) => expect(resp.ok).toBeTruthy());
+  });
+
+  it('Rejects to star repository if it does not exist', async () => {
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.existingOutsideUser;
+    const repoName = configGH.nonExistingRepository;
+
+    await githubSDK
+      .starRepo(ownerName, repoName)
+      .catch((err) => expect(err.ok).toBeFalsy());
+  });
+
+  it('Deletes repository star if it exists', async () => {
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.existingOutsideUser;
+    const repoName = configGH.existingRepository;
+
+    await githubSDK
+      .removeStarFromRepo(ownerName, repoName)
+      .then((resp) => expect(resp.ok).toBeTruthy());
+  });
+
+  it('Rejects to delete star from repository if it does not exist', async () => {
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.existingOutsideUser;
+    const repoName = configGH.nonExistingRepository;
+
+    await githubSDK
+      .removeStarFromRepo(ownerName, repoName)
+      .catch((err) => expect(err.ok).toBeFalsy());
   });
 });
