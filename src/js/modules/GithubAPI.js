@@ -51,6 +51,38 @@ class GithubAPI {
 
     return this._fetch(`repos/${username}/${repoName}/commits`, options);
   }
+
+  loadInvitation(username, repoName, invitedUser) {
+    const options = {
+      method: 'PUT',
+      body: JSON.stringify({
+        permission: 'pull',
+      }),
+    };
+    return this._fetch(
+      `repos/${username}/${repoName}/collaborators/${invitedUser}`,
+      options
+    );
+  }
+
+  listInvitations(username, repoName) {
+    const options = {
+      method: 'GET',
+    };
+
+    return this._fetch(`repos/${username}/${repoName}/invitations`, options);
+  }
+
+  removeInvitation(owner, repoName, id) {
+    const options = {
+      method: 'DELETE',
+      body: JSON.stringify({
+        permission: 'pull',
+      }),
+    };
+
+    return this._fetch(`repos/${owner}/${repoName}/invitations/${id}`, options);
+  }
 }
 
 export default GithubAPI;
