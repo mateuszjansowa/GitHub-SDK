@@ -204,3 +204,31 @@ xdescribe('Repository starring', () => {
       .catch((err) => expect(err.ok).toBeFalsy());
   });
 });
+
+describe('Pull requests', () => {
+  it('Resolves with the list of pull requests', async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.existingOutsideUser;
+    const repoName = configGH.existingRepository;
+
+    await githubSDK
+      .showPullRequests(ownerName, repoName)
+      .then((data) => expect(Array.isArray(data)).toBeTruthy());
+  });
+
+  it('Rejects the list of pull requests if user not exists', async () => {
+    expect.assertions(1);
+    const githubAPI = new GithubAPI(token);
+    const githubSDK = new GithubSDK(githubAPI, configGH.username);
+
+    const ownerName = configGH.nonExistingOutsideUser;
+    const repoName = configGH.existingRepository;
+
+    await githubSDK
+      .showPullRequests(ownerName, repoName)
+      .catch((err) => expect(err.statusText).toBe('Not Found'));
+  });
+});
